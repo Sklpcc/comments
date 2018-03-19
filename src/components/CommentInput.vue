@@ -1,9 +1,20 @@
 <template>
-  <div>
-    <!--suppress HtmlFormInputWithoutLabel -->
-    <textarea
-      v-model="content"/>
-    <button @click.prevent="addComment">Enviar Comentario</button>
+  <div class="container">
+    <div class="field">
+      <div class="control">
+        <textarea
+          v-model="content"
+          class="textarea"
+          placeholder="Escribe aquí tu comentario!"/>
+      </div>
+    </div>
+    <div class="field is-grouped is-grouped-right">
+      <div class="control">
+        <button
+          class="button is-primary"
+          @click.prevent="addComment">Enviar Comentario</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -24,6 +35,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="sass">
+  @import '~bulma/sass/utilities/_all'
+  @import '~bulma/sass/base/_all'
+  @import '~bulma/sass/elements/form'
 </style>

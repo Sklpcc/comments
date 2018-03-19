@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
-    <!--suppress HtmlFormInputWithoutLabel -->
+  <section
+    id="app"
+    class="section">
     <comment-input @addComment="addComment"/>
     <comment-board :comments="comments"/>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -60,5 +61,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass">
+  @import '~bulma/sass/utilities/_all'
+  @import '~bulma/sass/base/_all'
+  @import '~bulma/sass/layout/section'
 </style>

@@ -1,7 +1,17 @@
 <template>
-  <div class="comment">
-    <p>{{ content }}</p>
-    <button @click.prevent="deleteThis">Eliminar</button>
+  <div class="columns comment">
+    <div class="column is-9">
+      <p class="has-text-centered">{{ content }}</p>
+    </div>
+    <div class="column is-3">
+      <div class="field is-grouped is-grouped-right is-vertical-centered">
+        <div class="control">
+          <button
+            class="button is-danger"
+            @click.prevent="deleteThis">Eliminar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,14 +37,21 @@ export default {
 <style>
   .comment {
     border-bottom: 1px solid black;
-    display: flex;
   }
+</style>
 
-  .comment p {
-    flex-grow: 3;
-  }
+<style lang="sass">
+  @import '~bulma/sass/utilities/_all'
+  @import '~bulma/sass/base/_all'
+  @import '~bulma/sass/elements/button'
+  @import '~bulma/sass/grid/columns'
+  @import '~bulma/sass/components/level'
 
-  .commet button {
-    flex-grow: 1;
-  }
+  .comment p
+    white-space: pre-line
+
+  .is-vertical-centered
+    height: 100%
+    align-items: center
+
 </style>
