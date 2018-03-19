@@ -18,6 +18,7 @@ export default {
   methods: {
     addComment() {
       this.$emit('addComment', this.content);
+      this.content = '';
     },
   },
 };
