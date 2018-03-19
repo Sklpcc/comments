@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h2>Comentarios</h2>
-    <comment
-      v-for="comment in comments"
-      :content="comment.content"
-      :key="comment.id"
-      @deleteThis="deleteComment(comment.id)"/>
+    <article v-if="count > 0">
+      <h3>Comentarios</h3>
+      <comment
+        v-for="comment in comments"
+        :content="comment.content"
+        :key="comment.id"
+        @deleteThis="deleteComment(comment.id)"/>
+    </article>
+    <div v-else>
+      No hay ningun comentario, ingresa alguno.
+    </div>
   </div>
 </template>
 
@@ -22,6 +27,11 @@ export default {
     comments: {
       type: Array,
       required: true,
+    },
+  },
+  computed: {
+    count() {
+      return this.comments.length;
     },
   },
   methods: {
