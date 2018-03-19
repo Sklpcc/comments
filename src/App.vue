@@ -65,6 +65,15 @@ export default {
         variables: {
           id,
         },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          deleteComment: {
+            __typename: 'Comment',
+            id,
+            content: '',
+            createdAt: 1,
+          },
+        },
         update(store, { data: { deleteComment } }) {
           const data = store.readQuery({ query: queries.getAllComments });
           const index = data.comments.findIndex(el => el.id === deleteComment.id);
