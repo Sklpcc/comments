@@ -140,7 +140,6 @@ export default {
     comments: {
       query: queries.getAllComments,
       manual: true,
-      update: data => data.comments.nodes,
       result({ data }) {
         // noinspection JSUnresolvedVariable
         this.currentEndCursor = data.comments.pageInfo.endCursor;
