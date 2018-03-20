@@ -10,7 +10,7 @@
 <script>
 import CommentInput from './components/CommentInput';
 import CommentBoard from './components/CommentBoard';
-import { mutations, queries } from './api';
+import { mutations, queries, pageSize } from './api';
 
 export default {
   name: 'App',
@@ -37,16 +37,15 @@ export default {
           },
         },
         update(store, { data: { addComment } }) {
-          const data = store.readQuery({ query: queries.getAllComments });
-          data.comments.push(addComment);
-          store.writeQuery({ query: queries.getAllComments, data });
+          const data = store.readQuery({ query: queries.getAllComments, variables: { pageSize, after: '' } });
+          data.comments.nodes.unshift(addComment);
+          store.writeQuery({ query: queries.getAllComments, variables: { pageSize, after: '' }, data });
         },
       })
         // eslint-disable-next-line no-console
         .then(response => console.log(response))
         // eslint-disable-next-line no-console
         .catch(reason => console.error(reason));
-
       // TODO: refactor then and catch functions above
     },
   },

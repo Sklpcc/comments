@@ -76,11 +76,11 @@ export default {
           },
         },
         update(store, { data: { deleteComment } }) {
-          const data = store.readQuery({ query: queries.getAllComments });
-          const index = data.comments.findIndex(el => el.id === deleteComment.id);
+          const data = store.readQuery({ query: queries.getAllComments, variables: { pageSize, after: '' } });
+          const index = data.comments.nodes.findIndex(el => el.id === deleteComment.id);
           if (index !== -1) {
-            data.comments.splice(index, 1);
-            store.writeQuery({ query: queries.getAllComments, data });
+            data.comments.nodes.splice(index, 1);
+            store.writeQuery({ query: queries.getAllComments, variables: { pageSize, after: '' }, data });
           }
         },
       })
