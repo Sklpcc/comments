@@ -49,6 +49,7 @@ export default {
 
   .comment p
     white-space: pre-line
+    word-wrap: break-word
 
   .is-vertical-centered
     height: 100%
