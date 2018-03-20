@@ -2,6 +2,7 @@
   <div class="columns comment">
     <div class="column is-10">
       <p class="has-text-centered">{{ content }}</p>
+      <p class="help date">{{ dateFromTimeStamp }}</p>
     </div>
     <div class="column is-2">
       <div class="field is-grouped is-grouped-right is-vertical-centered">
@@ -25,6 +26,15 @@ export default {
       required: true,
       default: '',
     },
+    createdAt: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      dateFromTimeStamp: new Date(this.createdAt * 1000).toLocaleString(),
+    };
   },
   methods: {
     deleteThis() {
@@ -50,6 +60,8 @@ export default {
   .comment p
     white-space: pre-line
     word-wrap: break-word
+    &.date
+      text-align: right
 
   .is-vertical-centered
     height: 100%

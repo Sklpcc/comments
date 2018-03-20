@@ -13,6 +13,7 @@
       <comment
         v-for="comment in comments"
         :content="comment.content"
+        :created-at="comment.createdAt"
         :key="comment.id"
         @deleteThis="deleteComment(comment.id)"/>
       <infinite-loading
