@@ -1,9 +1,9 @@
 <template>
   <div class="columns comment">
-    <div class="column is-9">
+    <div class="column is-10">
       <p class="has-text-centered">{{ content }}</p>
     </div>
-    <div class="column is-3">
+    <div class="column is-2">
       <div class="field is-grouped is-grouped-right is-vertical-centered">
         <div class="control">
           <button
