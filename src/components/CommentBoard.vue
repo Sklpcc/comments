@@ -155,6 +155,7 @@ export default {
       error() {
         this.initialLoading = false;
         this.hasErrorOnFetch = true;
+        this.$emit('errorOnFetch');
       },
     },
   },

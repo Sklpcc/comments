@@ -2,8 +2,10 @@
   <section
     id="app"
     class="section">
-    <comment-input @addComment="addComment"/>
-    <comment-board/>
+    <comment-input
+      v-show="!hasErrorOnFetch"
+      @addComment="addComment"/>
+    <comment-board @errorOnFetch="hasErrorOnFetch = true"/>
   </section>
 </template>
 
@@ -17,6 +19,11 @@ export default {
   components: {
     CommentInput,
     CommentBoard,
+  },
+  data() {
+    return {
+      hasErrorOnFetch: false,
+    };
   },
   methods: {
     addComment(content) {
