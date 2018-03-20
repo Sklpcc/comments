@@ -15,6 +15,9 @@
       <infinite-loading
         spinner="spiral"
         @infinite="loadMoreComments">
+        <span slot="no-more">
+          No hay mas comentarios.
+        </span>
       </infinite-loading>
     </article>
     <div v-else>
