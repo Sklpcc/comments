@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     deleteComment(id) {
-      // noinspection JSCheckFunctionSignatures
+      // noinspection JSIgnoredPromiseFromCall, JSCheckFunctionSignatures
       this.$apollo.mutate({
         mutation: mutations.deleteComment,
         variables: {
@@ -89,11 +89,7 @@ export default {
             store.writeQuery({ query: queries.getAllComments, variables: { pageSize, after: '' }, data });
           }
         },
-      })
-        // eslint-disable-next-line no-console,no-console
-        .then(response => console.log(response))
-      // eslint-disable-next-line no-console,no-console
-        .catch(reason => console.error(reason));
+      });
     },
     loadMoreComments($state) {
       if (this.hasMoreComments) {

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     addComment(content) {
-      // noinspection JSCheckFunctionSignatures
+      // noinspection JSIgnoredPromiseFromCall, JSCheckFunctionSignatures
       this.$apollo.mutate({
         mutation: mutations.addComment,
         variables: {
@@ -48,12 +48,7 @@ export default {
           data.comments.nodes.unshift(addComment);
           store.writeQuery({ query: queries.getAllComments, variables: { pageSize, after: '' }, data });
         },
-      })
-        // eslint-disable-next-line no-console
-        .then(response => console.log(response))
-        // eslint-disable-next-line no-console
-        .catch(reason => console.error(reason));
-      // TODO: refactor then and catch functions above
+      });
     },
   },
 };
