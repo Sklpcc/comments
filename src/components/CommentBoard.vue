@@ -1,7 +1,7 @@
 <template>
   <div>
     <article v-if="count > 0">
-      <h3>Comentarios</h3>
+      <h3 class="title is-3">Comentarios</h3>
       <comment
         v-for="comment in comments"
         :content="comment.content"
