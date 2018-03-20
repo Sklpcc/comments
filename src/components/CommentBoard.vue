@@ -16,9 +16,13 @@
         :key="comment.id"
         @deleteThis="deleteComment(comment.id)"/>
       <infinite-loading
+        :distance="50"
         spinner="spiral"
         @infinite="loadMoreComments">
         <span slot="no-more">
+          Ya no hay mas comentarios.
+        </span>
+        <span slot="no-results">
           No hay mas comentarios.
         </span>
       </infinite-loading>
@@ -99,20 +103,15 @@ export default {
           pageSize,
           after: this.currentEndCursor,
         };
+
+        let hasNextPage = true;
+
         this.$apollo.queries.comments.fetchMore({
           variables,
           updateQuery: (previousQueryResult, { fetchMoreResult }) => {
             const newComments = fetchMoreResult.comments.nodes;
             // noinspection JSUnresolvedVariable
-            this.hasMoreComments = fetchMoreResult.comments.pageInfo.hasNextPage;
-            // noinspection JSUnresolvedVariable
-            this.currentEndCursor = fetchMoreResult.comments.pageInfo.endCursor;
-
-            if (!this.hasMoreComments) {
-              $state.complete();
-            } else {
-              $state.loaded();
-            }
+            hasNextPage = fetchMoreResult.comments.pageInfo.hasNextPage;
             return newComments.length ? {
               comments: {
                 // eslint-disable-next-line no-underscore-dangle
@@ -126,9 +125,14 @@ export default {
               },
             } : previousQueryResult;
           },
-        });
-      } else {
-        $state.complete();
+        })
+          .then(() => {
+            if (!hasNextPage) {
+              $state.complete();
+            } else {
+              $state.loaded();
+            }
+          });
       }
     },
   },
