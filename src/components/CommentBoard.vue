@@ -49,7 +49,7 @@ export default {
     return {
       comments: [],
       currentEndCursor: '',
-      hasMoreComments: true,
+      hasMoreComments: false,
       initialLoading: true,
       hasErrorOnFetch: false,
     };
@@ -129,6 +129,8 @@ export default {
               $state.loaded();
             }
           });
+      } else {
+        $state.complete();
       }
     },
   },
