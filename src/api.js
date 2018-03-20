@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+export const pageSize = 10;
+
 export const queries = {
   getAllComments: gql`query ($pageSize: Int!, $after: String){
   comments (first: $pageSize, after: $after, orderBy: {direction:DESC,field:CREATED_AT}){
