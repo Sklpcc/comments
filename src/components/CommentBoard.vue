@@ -3,6 +3,9 @@
     <div v-if="initialLoading">
       Cargando...
     </div>
+    <div v-else-if="hasErrorOnFetch">
+      Ha ocurrido un error al tratar de obtener los comentarios del servidor.
+    </div>
     <article
       v-else-if="count > 0"
       id="comments-container">
@@ -44,6 +47,7 @@ export default {
       currentEndCursor: '',
       hasMoreComments: true,
       initialLoading: true,
+      hasErrorOnFetch: false,
     };
   },
   computed: {
@@ -55,11 +59,6 @@ export default {
     comments() {
       this.initialLoading = false;
     },
-  },
-  created() {
-    // Just in case GraphQL query fail
-    // TODO: better to use promise reject and an error view
-    setTimeout(() => { this.initialLoading = false; }, 5000);
   },
   methods: {
     deleteComment(id) {
@@ -148,6 +147,10 @@ export default {
       variables: {
         pageSize,
         after: '',
+      },
+      error() {
+        this.initialLoading = false;
+        this.hasErrorOnFetch = true;
       },
     },
   },
