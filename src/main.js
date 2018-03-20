@@ -10,7 +10,7 @@ import App from './App';
 Vue.config.productionTip = false;
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'https://comments-server-connections.now.sh/graphql',
 });
 
 const apolloClient = new ApolloClient({
