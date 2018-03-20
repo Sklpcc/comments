@@ -18,16 +18,16 @@
 import Comment from './Comment';
 import { queries, mutations } from '../api';
 
+// noinspection JSUnusedGlobalSymbols
 export default {
   name: 'CommentBoard',
   components: {
     Comment,
   },
-  props: {
-    comments: {
-      type: Array,
-      required: true,
-    },
+  data() {
+    return {
+      comments: [],
+    };
   },
   computed: {
     count() {
@@ -64,6 +64,15 @@ export default {
         .then(response => console.log(response))
       // eslint-disable-next-line no-console,no-console
         .catch(reason => console.error(reason));
+    },
+  apollo: {
+    comments: {
+      query: queries.getAllComments,
+      update: data => data.comments.nodes,
+      variables: {
+        pageSize,
+        after: '',
+      },
     },
   },
 };

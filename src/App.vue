@@ -3,7 +3,7 @@
     id="app"
     class="section">
     <comment-input @addComment="addComment"/>
-    <comment-board :comments="comments"/>
+    <comment-board/>
   </section>
 </template>
 
@@ -17,11 +17,6 @@ export default {
   components: {
     CommentInput,
     CommentBoard,
-  },
-  data() {
-    return {
-      comments: [],
-    };
   },
   methods: {
     addComment(content) {
@@ -54,9 +49,6 @@ export default {
 
       // TODO: refactor then and catch functions above
     },
-  },
-  apollo: {
-    comments: queries.getAllComments,
   },
 };
 </script>
