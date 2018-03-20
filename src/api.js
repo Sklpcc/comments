@@ -1,11 +1,18 @@
 import gql from 'graphql-tag';
 
 export const queries = {
-  getAllComments: gql`query {
-      comments {
-        id
-        content
-        createdAt
+  getAllComments: gql`query ($pageSize: Int!, $after: String){
+  comments (first: $pageSize, after: $after, orderBy: {direction:DESC,field:CREATED_AT}){
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        nodes {
+            id
+            content
+            createdAt
+          }
+        totalCount
       }
     }`,
 };

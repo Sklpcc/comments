@@ -35,7 +35,7 @@ export default {
         optimisticResponse: {
           __typename: 'Mutation',
           addComment: {
-            __typename: 'Comment',
+            __typename: 'CommentNode',
             id: -1,
             content,
             createdAt: +new Date(),

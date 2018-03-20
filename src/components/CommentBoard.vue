@@ -45,7 +45,7 @@ export default {
         optimisticResponse: {
           __typename: 'Mutation',
           deleteComment: {
-            __typename: 'Comment',
+            __typename: 'CommentNode',
             id,
             content: '',
             createdAt: 1,
