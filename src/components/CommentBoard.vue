@@ -16,6 +16,7 @@
         :key="comment.id"
         @deleteThis="deleteComment(comment.id)"/>
       <infinite-loading
+        v-if="!noInfinteScroll"
         :distance="50"
         spinner="spiral"
         @infinite="loadMoreComments">
@@ -52,6 +53,7 @@ export default {
       hasMoreComments: false,
       initialLoading: true,
       hasErrorOnFetch: false,
+      noInfinteScroll: false,
     };
   },
   computed: {
@@ -60,8 +62,11 @@ export default {
     },
   },
   watch: {
-    comments() {
+    comments(newVal) {
       this.initialLoading = false;
+      if (!this.initialLoading && newVal instanceof Array && newVal.length === 0) {
+        this.noInfinteScroll = true;
+      }
     },
   },
   methods: {
@@ -144,6 +149,9 @@ export default {
         // noinspection JSUnresolvedVariable
         this.hasMoreComments = data.comments.pageInfo.hasNextPage;
         this.comments = data.comments.nodes;
+        if (this.initialLoading && !this.hasMoreComments) {
+          this.noInfinteScroll = true;
+        }
       },
       variables: {
         pageSize,
